@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3>Tedarikçi Kayıt Yönetim Ekranına Hoşgeldiniz..</h3>
+        <hr>
+        <hr>
+<a class = "btn btn-danger" href = "{% url 'tedarikci:ekleme' %}">Tedarikçi Ekle </a>
+<hr>
+{% if suppliers %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Şirket Adı</th>
+            <th scope="col">İletişim Kişisi</th>
+            <th scope="col">Kayıt Tarihi</th>
+            <th scope="col">Güncelle</th>
+            <th scope="col">Sil</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tedarikci in suppliers %}
+          <tr>
+            <th scope="row">{{tedarikci.id}}</th>
+           <td>{{tedarikci.company_name}}</td>
+           <td>{{tedarikci.contact_name}}</td>
+            
+            <td>{{tedarikci.register_time}}</td>
+            <td><a href="{% url 'tedarikci:guncelleme' tedarikci.id  %}" class = "btn btn-danger">Güncelle</a></td>
+            <td><a href="{% url 'tedarikci:silme' tedarikci.id %}" class = "btn btn-danger">Sil</a> </td>
+            
+            
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+{% else %}
+
+<div class = "alert alert-danger">
+    Henüz kayıtlı bir tedarikçi bulunmuyor...
+
+</div>
+{% endif %}
+
+
+
+
+
+        
+    </div>
+  </div>
+
+{% endblock body %}

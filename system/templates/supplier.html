@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class ="row">
+    
+        <div class="col-md-10 offset-md-3">
+            <div class="col-lg-8">
+                <h3>Tedarikçiler</h3>
+                <hr>
+                </div>
+        </div>
+</div>
+<div class ="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <form>
+                 {% csrf_token %} 
+                <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Tedarikçi Ara">
+              <button type="submit" class="btn btn-danger">Tedarikçi Ara</button>
+            </form>
+      </div>
+    </div>
+
+</div>
+
+<hr>
+<div class="col-md-10 offset-md-3">
+{% if suppliers %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Şirket Adı</th>
+            <th scope="col">İletişim Kişisi</th>
+            <th scope="col">Kayıt Tarihi</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for tedarikci in suppliers %}
+          <tr>
+            <th scope="row">{{tedarikci.id}}</th>
+           <td>{{tedarikci.company_name}}</td>
+           <td>{{tedarikci.contact_name}}</td>
+            
+            <td>{{tedarikci.register_time}}</td>
+            
+            
+            
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+{% else %}
+<div class ="row">
+    
+    
+        <div class="col-lg-8">
+<div class = "alert alert-danger">
+   Kayıtlı Tedarikçi Bulunamadı
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+
+{% endblock body %}
